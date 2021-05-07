@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="558.0" prefWidth="242.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DodajPojazdController">
+   <children>
+      <BorderPane layoutX="6.0" prefHeight="558.0" prefWidth="282.0">
+         <bottom>
+            <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="282.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="go_back" mnemonicParsing="false" onAction="#go_back_button" text="Cofnij" />
+               </children>
+            </HBox>
+         </bottom>
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="TOP_CENTER">
+               <children>
+                  <Button fx:id="lux_car" mnemonicParsing="false" onAction="#lux_car" text="Luksusowe auto" />
+                  <Button fx:id="fam_car" mnemonicParsing="false" onAction="#fam_car" text="Auto Rodzinne" />
+                  <Button fx:id="fast_car" mnemonicParsing="false" onAction="#fast_car" text="Auto Sportowe" />
+                  <Button fx:id="truck" mnemonicParsing="false" onAction="#truck" text="Ciężarówka" />
+                  <Button fx:id="special" mnemonicParsing="false" onAction="#special" text="Specjalne" />
+                  <Button fx:id="fast_motor" mnemonicParsing="false" onAction="#fast_motor" text="Sportowy motocykl" />
+                  <Button fx:id="tour_motor" mnemonicParsing="false" onAction="#tour_motor" text="Turystyczny Motocykl" />
+                  <Button fx:id="chopper" mnemonicParsing="false" onAction="#chopper" text="Chopper" />
+                  <Button fx:id="cross" mnemonicParsing="false" onAction="#cross" text="Cross" />
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

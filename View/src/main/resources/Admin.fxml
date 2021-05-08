@@ -24,19 +24,19 @@
                            <children>
                               <Button fx:id="add_vechicle" layoutX="306.0" layoutY="458.0" mnemonicParsing="false" onAction="#add_vechicle" text="Dodaj Pojazd" />
                               <Button fx:id="More_info" layoutX="414.0" layoutY="458.0" mnemonicParsing="false" onAction="#more_info" text="Wiecej informacji" />
-                              <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="-1.0" prefHeight="57.0" prefWidth="806.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #c36902;" AnchorPane.rightAnchor="0.20000000000004547">
+                              <GridPane fx:id="avaibleCarPane" alignment="CENTER" gridLinesVisible="true" layoutX="-1.0" prefHeight="64.0" prefWidth="805.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #c36902;" AnchorPane.rightAnchor="1.0">
                                 <columnConstraints>
-                                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="100.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="120.199951171875" minWidth="10.0" prefWidth="120.199951171875" />
-                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="96.199951171875" minWidth="10.0" prefWidth="81.800048828125" />
+                                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="120.199951171875" minWidth="100.0" prefWidth="120.199951171875" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="96.199951171875" minWidth="100.0" prefWidth="81.800048828125" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID pojazdu" />
@@ -50,6 +50,7 @@
                                  </children>
                               </GridPane>
                               <TextField fx:id="car_ID" alignment="CENTER" layoutX="532.0" layoutY="458.0" promptText="Wpisz ID auta" />
+                              <Button layoutX="696.0" layoutY="458.0" mnemonicParsing="false" onAction="#zaladuj" text="Załaduj" />
                            </children>
                         </AnchorPane>
                   </content>

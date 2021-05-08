@@ -44,4 +44,18 @@ public class Place {
         }
         return tmp;
     }
+
+    public Vehicle getVehicle(int id) {
+        for(Vehicle vehicle : availbleCars){
+            if(vehicle.getCarId()==id){
+                return vehicle;
+            }
+        }
+        for(Vehicle vehicle : rentedCars){
+            if(vehicle.getCarId()==id){
+                return vehicle;
+            }
+        }
+        return null;
+    }
 }

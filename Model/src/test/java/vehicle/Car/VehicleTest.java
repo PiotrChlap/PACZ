@@ -59,6 +59,8 @@ class VehicleTest {
         assertEquals(250,cross.getTorque());
         assertEquals(320,sportMotor.getMaxSpeed());
         assertEquals(80,touristMotor.getBootCapacity());
+
+        System.out.println(track.getClass().getSimpleName());
     }
 
 

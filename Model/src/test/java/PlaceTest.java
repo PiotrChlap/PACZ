@@ -35,6 +35,7 @@ class PlaceTest {
     public  void placeTest(){
         place.addCar(track);
         place.addCar(touristMotor);
+        System.out.println(place.getAvailbleCars().get(0).getClass().getSimpleName());
         assertEquals(2,place.getAvailbleCars().size());
         place.handOverCar(track);
         assertEquals(1,place.getAvailbleCars().size());

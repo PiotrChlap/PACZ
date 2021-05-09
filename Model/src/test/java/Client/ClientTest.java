@@ -8,6 +8,7 @@ import Client.Individual.SilverIndClient;
 import Rest.Controller;
 import Rest.Order;
 import Rest.Place;
+import Rest.Rent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vehicle.Car.*;
@@ -77,10 +78,11 @@ class ClientTest {
         place.addCar(track);
         place.addCar(special);
         place.addCar(Family);
-        basicBC.findOrder(1).addRent(basicBC.getController().handOverCar(2),LocalDate.of(2021,5,1),LocalDate.of(2021,5,29));
-        basicBC.findOrder(1).addRent(basicBC.getController().handOverCar(3),LocalDate.of(2021,6,1),LocalDate.of(2021,7,29));
+        basicBC.findOrder(1).addRent(new Rent(1,LocalDate.of(2021,5,1),LocalDate.of(2021,5,29),basicBC.getController().handOverCar(2)));
+        basicBC.findOrder(1).addRent(new Rent(2 ,LocalDate.of(2021,6,1),LocalDate.of(2021,7,29),basicBC.getController().handOverCar(3)));
+        System.out.println(basicBC.getInfoOrders());
         assertTrue(basicBC.getInfoOrders().equals("1. Zamówienie \n" +
-                "Data złożenia: 2021-05-07\n" +
+                "Data złożenia: " + LocalDate.now() + "\n"+
                 "1. Wypożyczenie: \n" +
                 "Id: 1 Czas rozpoczęcia: 2021-05-01 Czas zakończenia: 2021-05-29. Wypożyczone auto: Id auta: 2, Marka: Mercedes, Model: Transit, Pojemność: 2.0, Moc: 130, Automatyczna skrzynia biegów: false, Rok produkcji: 2005, Liczba drzwi: 2, Maksymalna ładowność: 11000\n" +
                 "Koszt: \n" +

@@ -29,8 +29,8 @@ class InvoiceTest {
         special = new Special(1,"Lingdon", "Asla", 5.0F, 80, false,15,2010,1,"Wóz oborniczy");
         r2 = new Rent(2,LocalDate.of(2020,11,1),LocalDate.of(2020,12,1),special );
         order= new Order(0,LocalDate.of(2020, 9,25),basicBC);
-        order.addRent(track,LocalDate.of(2020,10,1),LocalDate.of(2020,10,5));
-        order.addRent(special,LocalDate.of(2020,2,1),LocalDate.of(2020,10,5));
+        order.addRent(r1);
+        order.addRent(r2);
         invoice = new Invoice(20212021, LocalDate.of(2002,10,10),LocalDate.of(2002,10,11),true,order);
         invoice2 = new Invoice(20212021, LocalDate.of(2002,10,10),null,false,null);
     }

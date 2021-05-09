@@ -38,13 +38,15 @@ public class AdminControll {
 
     @FXML
     private GridPane avaibleCarPane;
+    private GridPane copyPanel;
+    private  boolean x =false;
 
     public void setConn(Connection conn) {
         this.conn = conn;
     }
 
     public void initialize() throws SQLException {
-
+        copyPanel= avaibleCarPane;
     }
 
     public void setPlace(Place place) {
@@ -57,8 +59,12 @@ public class AdminControll {
     }
 
     public void add_vechicle(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/DodajPojazd.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DodajPojazd.fxml"));
+        Parent root = loader.load();
         Stage stage = new Stage();
+        DodajPojazdController dodajPojazdController = loader.getController();
+        dodajPojazdController.setPlace(place);
+        dodajPojazdController.setConn(conn);
         stage.setTitle("Dodaj_Pojazd");
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(new Scene(root));
@@ -78,7 +84,6 @@ public class AdminControll {
     public void more_info(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/WiecejInformacji.fxml"));
         Parent root = (Parent) loader.load();
-        System.out.println(car_ID.getText());
         Stage stage = new Stage();
         WiecejInformacjiController wiecejInformacjiController = loader.getController();
         wiecejInformacjiController.setId(Integer.parseInt(car_ID.getText()));
@@ -95,8 +100,10 @@ public class AdminControll {
 //        GridPane new_grid = new GridPane();
 //        new_grid.getRowConstraints().add(avaibleCarPane.getRowConstraints().get(0));
 //        avaibleCarPane.getChildren().clear();
+
         String [] tabela = {"truck","special","sportPassCar","premiumPassCar","familyPassCar","chopper","cross_M","sportMotorcycle","touristMotorcycle"};
         int [] tabela2 = {10,10,13,13,13,10,10,10,10};
+        place.getAvailbleCars().clear();
         for(int i =0 ; i<9; i++){
             String ask = "SELECT * FROM " + tabela[i];
             Statement pst1 = conn.createStatement();
@@ -138,8 +145,14 @@ public class AdminControll {
                 }
             }
         }
+        if(!x){
+            x=true;
+        } else {
+            avaibleCarPane.getChildren().remove(avaibleCarPane.getCellBounds(0,1));
+        }
         int i =1;
         for(Vehicle vehicle:place.getAvailbleCars()){
+
             avaibleCarPane.add(new Text(String.valueOf(vehicle.getCarId())),0,i);
             avaibleCarPane.add(new Text(vehicle.getMarka()),1,i);
             avaibleCarPane.add(new Text(vehicle.getModel()),2,i);
@@ -150,6 +163,7 @@ public class AdminControll {
             avaibleCarPane.add(new Text(String.valueOf(vehicle.getYearOfProduction())),7,i);
             i+=1;
         }
+
         System.out.println();
     }
 

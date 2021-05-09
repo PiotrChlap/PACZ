@@ -1,3 +1,4 @@
+import Rest.Place;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class SportoweAutoController {
     public Button go_back;
@@ -21,7 +23,11 @@ public class SportoweAutoController {
             .observableArrayList("Tak","Nie");
     ObservableList<String> SpoilerLista = FXCollections
             .observableArrayList("Tak","Nie");
+    private Place place;
 
+    public void setPlace(Place place) {
+        this.place = place;
+    }
     @FXML
     private TextField PoleID;
     @FXML
@@ -48,7 +54,11 @@ public class SportoweAutoController {
     private ComboBox Spoiler;
     @FXML
     private TextField MaksPredkosc;
+    private Connection conn;
 
+    public void setConn(Connection conn) {
+        this.conn = conn;
+    }
     @FXML
     private void initialize(){
         SkrzyniaBiegowBox.setValue("Nie");
@@ -61,20 +71,67 @@ public class SportoweAutoController {
         Spoiler.setItems(SpoilerLista);
     }
 
-    public void add_vehicle(ActionEvent actionEvent) {
-        System.out.println(PoleID.getText());
-        System.out.println(marka.getText());
-        System.out.println(model.getText());
-        System.out.println(pojemnosc.getText());
-        System.out.println(MocSilnika.getText());
-        System.out.println(SkrzyniaBiegowBox.getValue());
-        System.out.println(Cena.getText());
-        System.out.println(RokProdukcji.getText());
-        System.out.println(LiczbaDrzwi.getText());
-        System.out.println(LiczbaSiedzen.getText());
-        System.out.println(ChipTunning.getValue());
-        System.out.println(Spoiler.getValue());
-        System.out.println(MaksPredkosc.getText());
+    public void add_vehicle(ActionEvent actionEvent) throws SQLException {
+        boolean tmp;
+        boolean a;
+        boolean d;
+        boolean b;
+        if(SkrzyniaBiegowBox.getValue().equals("Tak")){
+            tmp=true;
+        } else {
+            tmp=false;
+        }
+
+        if(ChipTunning.getValue().equals("Tak")){
+            a=true;
+        } else {
+            a=false;
+        }
+        if(Spoiler.getValue().equals("Tak")){
+            d=true;
+        } else {
+            d=false;
+        }
+
+        String ask ="SELECT max(idx) FROM  (SELECT id_t as idx FROM special UNION ALL\n" +
+                "SELECT id_t as idx FROM truck\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM  sportPassCar\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM premiumPassCar\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM familyPassCar\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM chopper\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM cross_M\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM sportMotorcycle\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM touristMotorcycle) as t";
+        Statement pst1 = conn.createStatement();
+        ResultSet set = pst1.executeQuery(ask);
+        int data = 0;
+        while (set.next()) {
+            data = set.getInt(1);
+        }
+
+        String query = "INSERT INTO premiumPassCar values(?,?,?,?,?,?, ?,?,?,?,?,?,?)";
+        PreparedStatement pst = conn.prepareStatement(query);
+        pst.setInt(1, data + 1);
+        pst.setString(2, marka.getText());
+        pst.setString(3, model.getText());
+        pst.setFloat(4, Float.parseFloat(pojemnosc.getText()));
+        pst.setInt(5, Integer.parseInt(MocSilnika.getText()));
+        pst.setBoolean(6, tmp);
+        pst.setInt(7, Integer.parseInt(Cena.getText()));
+        pst.setInt(8, Integer.parseInt(RokProdukcji.getText()));
+        pst.setInt(9,Integer.parseInt(LiczbaDrzwi.getText()));
+        pst.setInt(10,Integer.parseInt(LiczbaSiedzen.getText()));
+        pst.setBoolean(11,a);
+        pst.setBoolean(12,d);
+        pst.setInt(13,Integer.parseInt(MaksPredkosc.getText()));
+        pst.executeUpdate();
     }
 
     public void go_back(ActionEvent actionEvent) throws IOException {

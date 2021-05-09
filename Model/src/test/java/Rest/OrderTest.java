@@ -31,7 +31,7 @@ class OrderTest {
 
     @Test
     public void orderTest() {
-       assertTrue(order.addRent(track,LocalDate.of(2020,10,1),LocalDate.of(2020,10,5)));
+       assertTrue(order.addRent(new Rent(1,LocalDate.of(2020,10,1),LocalDate.of(2020,10,5),track)));
 
     }
 

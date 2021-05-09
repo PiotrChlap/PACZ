@@ -1,3 +1,4 @@
+import Rest.Place;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.*;
 
 public class ChopperController {
     public Button go_back;
@@ -20,6 +22,12 @@ public class ChopperController {
             .observableArrayList("Tak","Nie");
     ObservableList<String> TypNapeduLista = FXCollections
             .observableArrayList("Łańcuch","Wał Kardana","Pas napędowy");
+
+    private Place place;
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
 
     @FXML
     private TextField PoleID;
@@ -41,7 +49,11 @@ public class ChopperController {
     private ComboBox TypNapeduBox;
     @FXML
     private TextField Dlugosc;
+    private Connection conn;
 
+    public void setConn(Connection conn) {
+        this.conn = conn;
+    }
     @FXML
     private void initialize(){
         SkrzyniaBiegowBox.setValue("Nie");
@@ -51,17 +63,50 @@ public class ChopperController {
         TypNapeduBox.setItems(TypNapeduLista);
     }
 
-    public void add_vehicle(ActionEvent actionEvent) {
-        System.out.println(PoleID.getText());
-        System.out.println(marka.getText());
-        System.out.println(model.getText());
-        System.out.println(pojemnosc.getText());
-        System.out.println(MocSilnika.getText());
-        System.out.println(SkrzyniaBiegowBox.getValue());
-        System.out.println(Cena.getText());
-        System.out.println(RokProdukcji.getText());
-        System.out.println(TypNapeduBox.getValue());
-        System.out.println(Dlugosc.getText());
+    public void add_vehicle(ActionEvent actionEvent) throws SQLException {
+        boolean tmp;
+        if(SkrzyniaBiegowBox.getValue().equals("Tak")){
+            tmp=true;
+        } else {
+            tmp=false;
+        }
+
+        String ask ="SELECT max(idx) FROM  (SELECT id_t as idx FROM special UNION ALL\n" +
+                "SELECT id_t as idx FROM truck\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM  sportPassCar\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM premiumPassCar\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM familyPassCar\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM chopper\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM cross_M\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM sportMotorcycle\n" +
+                "UNION ALL\n" +
+                "SELECT id_t as idx FROM touristMotorcycle) as t";
+        Statement pst1 = conn.createStatement();
+        ResultSet set = pst1.executeQuery(ask);
+        int data = 0;
+        while (set.next()) {
+            data = set.getInt(1);
+        }
+
+        String query = "INSERT INTO chopper values(?,?,?,?,?,?, ?,?,?,?)";
+        PreparedStatement pst = conn.prepareStatement(query);
+        pst.setInt(1, data + 1);
+        pst.setString(2, marka.getText());
+        pst.setString(3, model.getText());
+        pst.setFloat(4, Float.parseFloat(pojemnosc.getText()));
+        pst.setInt(5, Integer.parseInt(MocSilnika.getText()));
+        pst.setBoolean(6, tmp);
+        pst.setInt(7, Integer.parseInt(Cena.getText()));
+        pst.setInt(8, Integer.parseInt(RokProdukcji.getText()));
+        pst.setString(9,(String) TypNapeduBox.getValue());
+        pst.setInt(10,Integer.parseInt(Dlugosc.getText()));
+        pst.executeUpdate();
     }
 
     public void go_back(ActionEvent actionEvent) throws IOException {

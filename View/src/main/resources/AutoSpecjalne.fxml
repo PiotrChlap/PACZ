@@ -23,8 +23,6 @@
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -34,28 +32,24 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Marka:" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Model" GridPane.rowIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pojemność:" GridPane.rowIndex="3" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Moc silnika" GridPane.rowIndex="4" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Automatyczna &#10;skrzynia biegów" GridPane.rowIndex="5" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cena" GridPane.rowIndex="6" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rok produkcji" GridPane.rowIndex="7" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Liczba Drzwi" GridPane.rowIndex="8" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ" GridPane.rowIndex="10" />
-                  <ComboBox fx:id="SkrzyniaBiegowBox" onAction="#add_vechicle" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="PoleID" onAction="#add_vechicle" GridPane.columnIndex="1" />
-                  <TextField fx:id="marka" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="model" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField fx:id="pojemnosc" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="MocSilnika" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="Cena" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField fx:id="RokProdukcji" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <TextField fx:id="LiczbaDrzwi" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Liczba siedzeń" GridPane.rowIndex="9" />
-                  <TextField fx:id="LiczbaSiedzen" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <TextField fx:id="Typ" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Marka:" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Model" GridPane.rowIndex="1" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pojemność:" GridPane.rowIndex="2" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Moc silnika" GridPane.rowIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Automatyczna &#10;skrzynia biegów" GridPane.rowIndex="4" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cena" GridPane.rowIndex="5" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rok produkcji" GridPane.rowIndex="6" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Liczba Drzwi" GridPane.rowIndex="7" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Typ" GridPane.rowIndex="8" />
+                  <ComboBox fx:id="SkrzyniaBiegowBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="marka" onAction="#add_vechicle" GridPane.columnIndex="1" />
+                  <TextField fx:id="model" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="pojemnosc" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="MocSilnika" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="Cena" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="RokProdukcji" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="LiczbaDrzwi" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <TextField fx:id="Typ" onAction="#add_vechicle" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                </children>
             </GridPane>
          </center>

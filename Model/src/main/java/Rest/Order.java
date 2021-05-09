@@ -29,10 +29,8 @@ public class Order {
         return submitDate;
     }
 
-    public boolean addRent(Vehicle vehicle, LocalDate startDate, LocalDate endDate){
-//        int i=Integer.parseInt(LocalDateTime.now().format(formatter));
-        int i = listOfRents.size()+1;
-        listOfRents.add(new Rent(i,startDate,endDate, vehicle));
+    public boolean addRent(Rent rent){
+        listOfRents.add(rent);
         return true;
     }
     public int getAmountRentedCar(){

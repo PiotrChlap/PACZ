@@ -1,3 +1,5 @@
+import Client.Client;
+import Rest.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +16,11 @@ public class DodajZamowienieController {
     ObservableList<String> monthList = FXCollections
             .observableArrayList("1","2","3","4","5","6","7","8","9","10","11","12");
 
+    private Client client;
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     @FXML
     private ComboBox car_id;

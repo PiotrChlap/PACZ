@@ -1,3 +1,7 @@
+import Client.Client;
+import Rest.Controller;
+import Rest.Order;
+import Rest.Place;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,13 +12,43 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class KlientControll {
     public Button log_out;
     public TextField car_ID;
 
+    private Client client;
+    private Place place;
+    private Connection conn;
+    private Controller controller;
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
+    public void setConn(Connection conn) {
+        this.conn = conn;
+    }
+
+
     public void new_order(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/DodajZamowienie.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DodajZamowienie.fxml"));
+        Parent root = loader.load();
+        DodajZamowienieController dodajZamowienieController = loader.getController();
+        client.setController(controller);
+        dodajZamowienieController.setClient(client);
+
+        //Dodaj order
+        client.addOrder(new Order());
         Stage stage = new Stage();
         stage.setTitle("Login");
         stage.setScene(new Scene(root));
@@ -50,5 +84,6 @@ public class KlientControll {
     }
 
     public void create_invoice(ActionEvent actionEvent) {
+        System.out.println(client.getBasedInfo());
     }
 }

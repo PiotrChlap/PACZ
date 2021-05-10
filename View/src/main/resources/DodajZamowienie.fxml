@@ -16,11 +16,8 @@
          <bottom>
             <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="282.0" spacing="10.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button fx:id="go_back" mnemonicParsing="false" onAction="#go_back_button" text="Cofnij" />
-                  <Button fx:id="delete_car" mnemonicParsing="false" onAction="#delete_car_button" text="Usuń" />
-                  <ComboBox fx:id="car_id_delete" prefWidth="150.0" promptText="ID auta" />
                   <Button fx:id="add_vehicle" mnemonicParsing="false" onAction="#add_vehicle" text="Dodaj auto" />
-                  <Button fx:id="finish" mnemonicParsing="false" onAction="#finish" text="Zakończ" />
+                  <Button fx:id="go_back" mnemonicParsing="false" onAction="#go_back_button" text="Zakończ" />
                </children>
             </HBox>
          </bottom>
@@ -28,16 +25,17 @@
             <VBox alignment="TOP_CENTER" prefHeight="523.0" prefWidth="498.0" spacing="20.0" BorderPane.alignment="TOP_CENTER">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wybierz auto które chcesz wypożyczyć" />
-                  <ComboBox fx:id="car_id" onAction="#add_vehicle" prefWidth="150.0" promptText="ID auta" />
+                  <ComboBox fx:id="car_id" onShown="#refresh" prefWidth="150.0" promptText="ID auta" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Do kiedy auto jest wynajęte" />
                   <HBox alignment="CENTER" prefHeight="34.0" prefWidth="482.0">
                      <children>
-                        <ComboBox fx:id="day" onAction="#add_vehicle" prefWidth="150.0" promptText="Dzień" />
-                        <ComboBox fx:id="month" onAction="#add_vehicle" prefWidth="150.0" promptText="Miesiąc" />
-                        <TextField fx:id="year" onAction="#add_vehicle" promptText="Rok" />
+                        <ComboBox fx:id="day" prefWidth="150.0" promptText="Dzień" />
+                        <ComboBox fx:id="month" prefWidth="150.0" promptText="Miesiąc" />
+                        <TextField fx:id="year" promptText="Rok" />
                      </children>
                   </HBox>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wynajęte auta" />
+                  <Text fx:id="orders" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybierz auto które chcesz wypożyczyć" wrappingWidth="458.287109375" />
                </children>
             </VBox>
          </center>

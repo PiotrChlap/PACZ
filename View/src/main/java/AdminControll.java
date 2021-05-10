@@ -38,6 +38,8 @@ public class AdminControll {
 
     @FXML
     private GridPane avaibleCarPane;
+    @FXML
+    private GridPane rentedCarPane;
     private GridPane copyPanel;
     private  boolean x =false;
 
@@ -110,45 +112,72 @@ public class AdminControll {
             ResultSet set = pst1.executeQuery(ask);
             int j =0;
             while(set.next()) {
-                System.out.println(set.getString(2));
-                String [] tmp = new String[tabela2[i]];
-                for(int z=0; z<tabela2[i];z++) {
+                String [] tmp = new String[tabela2[i]+1];
+                for(int z=0; z<tabela2[i]+1;z++) {
                     tmp[z]=set.getString(z+1);
                 }
-                if(tabela[i].equals("truck")){
-                    place.addCar(new Truck(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9])));
-                } else if (tabela[i].equals("special")) {
-                    place.addCar(new Special(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            Integer.parseInt(tmp[8]),tmp[9]));
-                } else if (tabela[i].equals("sportPassCar")) {
-                    place.addCar(new SportPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Integer.parseInt(tmp[12])));
-                } else if (tabela[i].equals("premiumPassCar")) {
-                    place.addCar(new PremiumPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Boolean.parseBoolean(tmp[12])));
-                } else if (tabela[i].equals("familyPassCar")) {
-                    place.addCar(new FamilyPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),typeFamilyCar.valueOf(tmp[10]),Integer.parseInt(tmp[11]),Boolean.parseBoolean(tmp[12])));
-                } else if (tabela[i].equals("chopper")) {
-                    place.addCar(new Chopper(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            driveTypeMotorcycle.valueOf(tmp[8]),Float.parseFloat(tmp[9])));
-                } else if (tabela[i].equals("cross_M")) {
-                    place.addCar(new Cross(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
-                } else if (tabela[i].equals("sportMotorcycle")) {
-                    place.addCar(new SportMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
-                } else {
-                    place.addCar(new TouristMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-                            driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
+                if(!set.getBoolean(tmp.length)){
+                    if(tabela[i].equals("truck")){
+                        place.addCar(new Truck(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9])));
+                    } else if (tabela[i].equals("special")) {
+                        place.addCar(new Special(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),tmp[9]));
+                    } else if (tabela[i].equals("sportPassCar")) {
+                        place.addCar(new SportPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Integer.parseInt(tmp[12])));
+                    } else if (tabela[i].equals("premiumPassCar")) {
+                        place.addCar(new PremiumPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Boolean.parseBoolean(tmp[12])));
+                    } else if (tabela[i].equals("familyPassCar")) {
+                        place.addCar(new FamilyPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),typeFamilyCar.valueOf(tmp[10]),Integer.parseInt(tmp[11]),Boolean.parseBoolean(tmp[12])));
+                    } else if (tabela[i].equals("chopper")) {
+                        place.addCar(new Chopper(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                driveTypeMotorcycle.valueOf(tmp[8]),Float.parseFloat(tmp[9])));
+                    } else if (tabela[i].equals("cross_M")) {
+                        place.addCar(new Cross(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
+                    } else if (tabela[i].equals("sportMotorcycle")) {
+                        place.addCar(new SportMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
+                    } else {
+                        place.addCar(new TouristMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
+                    }
                 }
+                else {
+                    if(tabela[i].equals("truck")){
+                        place.addCarRented(new Truck(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9])));
+                    } else if (tabela[i].equals("special")) {
+                        place.addCarRented(new Special(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),tmp[9]));
+                    } else if (tabela[i].equals("sportPassCar")) {
+                        place.addCarRented(new SportPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Integer.parseInt(tmp[12])));
+                    } else if (tabela[i].equals("premiumPassCar")) {
+                        place.addCarRented(new PremiumPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Boolean.parseBoolean(tmp[12])));
+                    } else if (tabela[i].equals("familyPassCar")) {
+                        place.addCarRented(new FamilyPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),typeFamilyCar.valueOf(tmp[10]),Integer.parseInt(tmp[11]),Boolean.parseBoolean(tmp[12])));
+                    } else if (tabela[i].equals("chopper")) {
+                        place.addCarRented(new Chopper(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                driveTypeMotorcycle.valueOf(tmp[8]),Float.parseFloat(tmp[9])));
+                    } else if (tabela[i].equals("cross_M")) {
+                        place.addCarRented(new Cross(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
+                    } else if (tabela[i].equals("sportMotorcycle")) {
+                        place.addCarRented(new SportMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
+                    } else {
+                        place.addCarRented(new TouristMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
+                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
+                    }
+                }
+
             }
-        }
-        if(!x){
-            x=true;
-        } else {
-            avaibleCarPane.getChildren().remove(avaibleCarPane.getCellBounds(0,1));
         }
         int i =1;
         for(Vehicle vehicle:place.getAvailbleCars()){
@@ -161,6 +190,18 @@ public class AdminControll {
             avaibleCarPane.add(new Text(String.valueOf(vehicle.isAutomaticGearbox())),5,i);
             avaibleCarPane.add(new Text(String.valueOf(vehicle.getPrice())),6,i);
             avaibleCarPane.add(new Text(String.valueOf(vehicle.getYearOfProduction())),7,i);
+            i+=1;
+        }
+        for(Vehicle vehicle:place.getRentedCars()){
+
+            rentedCarPane.add(new Text(String.valueOf(vehicle.getCarId())),0,i);
+            rentedCarPane.add(new Text(vehicle.getMarka()),1,i);
+            rentedCarPane.add(new Text(vehicle.getModel()),2,i);
+            rentedCarPane.add(new Text(String.valueOf(vehicle.getCapacity())),3,i);
+            rentedCarPane.add(new Text(String.valueOf(vehicle.getPower())),4,i);
+            rentedCarPane.add(new Text(String.valueOf(vehicle.isAutomaticGearbox())),5,i);
+            rentedCarPane.add(new Text(String.valueOf(vehicle.getPrice())),6,i);
+            rentedCarPane.add(new Text(String.valueOf(vehicle.getYearOfProduction())),7,i);
             i+=1;
         }
 

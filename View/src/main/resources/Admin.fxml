@@ -59,7 +59,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: grey;">
                            <children>
-                              <GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="57.0" prefWidth="806.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #c36902;">
+                              <GridPane fx:id="rentedCarPane" alignment="CENTER" gridLinesVisible="true" prefHeight="57.0" prefWidth="806.0" style="-fx-border-color: black; -fx-border-width: 3; -fx-background-color: #c36902;">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

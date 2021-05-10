@@ -20,10 +20,8 @@ import javafx.stage.Stage;
 
 import javax.xml.transform.Result;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDate;
 
 public class LoginController {
 
@@ -42,11 +40,59 @@ public class LoginController {
     private Controller controller;
 
     @FXML
-    public void initialize(){
+    public void initialize() throws SQLException {
         DAO dao = new DAO();
         conn = dao.connect();
         place = new Place();
         controller = new Controller(place);
+        LocalDate l1 = LocalDate.of(2021,5,9);
+        LocalDate l2 = LocalDate.of(2021,6,7);
+        String ask = "SELECT * FROM rent";
+        Statement pst1 = conn.createStatement();
+        ResultSet set = pst1.executeQuery(ask);
+        String [] tabela = {"truck","special","sportPassCar","premiumPassCar","familyPassCar","chopper","cross_M","sportMotorcycle","touristMotorcycle"};
+        while (set.next()){
+            System.out.println("LOGIN CONTROLLER");
+            System.out.println(LocalDate.parse(set.getString(3)));
+            System.out.println(LocalDate.now());
+            System.out.println(LocalDate.parse(set.getString(3)).isAfter(LocalDate.now()));
+            if(!set.getBoolean(5)){
+                if(LocalDate.now().isAfter(LocalDate.parse(set.getString(3)))){
+                    String query = "update rent set closed=true where id_r = "+ set.getInt(1);
+                    PreparedStatement pst = conn.prepareStatement(query);
+                    pst.executeUpdate();
+
+                    String ask1 ="SELECT * FROM  (SELECT id_t as idx FROM special UNION ALL\n" +
+                            "SELECT id_t as idx FROM truck\n" +
+                            "UNION ALL\n" +
+                            "SELECT id_t as idx FROM  sportPassCar\n" +
+                            "UNION ALL\n" +
+                            "SELECT id_t as idx FROM premiumPassCar\n" +
+                            "UNION ALL\n" +
+                            "SELECT id_t as idx FROM familyPassCar\n" +
+                            "UNION ALL\n" +
+                            "SELECT id_t as idx FROM chopper\n" +
+                            "UNION ALL\n" +
+                            "SELECT id_t as idx FROM cross_M\n" +
+                            "UNION ALL\n" +
+                            "SELECT id_t as idx FROM sportMotorcycle\n" +
+                            "UNION ALL\n" +
+                            "SELECT id_t as idx FROM touristMotorcycle) as t";
+                    Statement pst3 = conn.createStatement();
+                    ResultSet set2 = pst3.executeQuery(ask1);
+                    while (set2.next()) {
+                        if(set2.getInt(1)==set.getInt(6)){
+                            for(String string: tabela){
+                                String query1 = "update "+string+" set rented=false where id_t = "+ set2.getInt(1);
+                                PreparedStatement pst2 = conn.prepareStatement(query1);
+                                pst2.executeUpdate();
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
     }
 
@@ -67,20 +113,30 @@ public class LoginController {
                 klientControll.setPlace(place);
                 klientControll.setController(controller);
                 if(set.getInt(12)==1){
-                    klientControll.setClient(new BasicBussinessClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5),
-                            set.getString(6),set.getString(7),set.getString(8)));
+                    BasicBussinessClient basicBussinessClient = new BasicBussinessClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5),
+                            set.getString(6),set.getString(7),set.getString(8));
+                    basicBussinessClient.addLoyaltyPoints(set.getInt(13));
+                    klientControll.setClient(basicBussinessClient);
                 } else if(set.getInt(12)==2){
-                    klientControll.setClient(new PremiumBusinessClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5),
-                            set.getString(6),set.getString(7),set.getString(8)));
+                    PremiumBusinessClient premiumBusinessClient = new PremiumBusinessClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5),
+                            set.getString(6),set.getString(7),set.getString(8));
+                    premiumBusinessClient.setLoyaltyPoints(set.getInt(13));
+                    klientControll.setClient(premiumBusinessClient);
                 } else if(set.getInt(12)==3){
-                    klientControll.setClient(new BasicIndClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(9),set.getString(10),
-                            set.getString(11)));
+                    BasicIndClient basicIndClient = new BasicIndClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(9),set.getString(10),
+                            set.getString(11));
+                    basicIndClient.setLoyaltyPoints(set.getInt(13));
+                    klientControll.setClient(basicIndClient);
                 } else if(set.getInt(12)==4){
-                    klientControll.setClient(new SilverIndClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(9),set.getString(10),
-                            set.getString(12)));
+                    SilverIndClient silverIndClient = new SilverIndClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(9),set.getString(10),
+                            set.getString(11));
+                    silverIndClient.setLoyaltyPoints(set.getInt(13));
+                    klientControll.setClient(silverIndClient);
                 } else {
-                    klientControll.setClient(new DiamondIndClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(9),set.getString(10),
-                            set.getString(12)));
+                    DiamondIndClient diamondIndClient = new DiamondIndClient(set.getInt(1),set.getString(2),set.getString(3),set.getString(4),set.getString(9),set.getString(10),
+                            set.getString(11));
+                    diamondIndClient.setLoyaltyPoints(set.getInt(13));
+                    klientControll.setClient(diamondIndClient);
                 }
 
                 Stage stage = new Stage();

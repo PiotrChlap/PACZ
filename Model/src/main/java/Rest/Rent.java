@@ -1,12 +1,10 @@
 package Rest;
 
 import Client.Client;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import vehicle.Vehicle;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 public class Rent {
     private int rentId;
@@ -47,17 +45,20 @@ public class Rent {
         return tmp;
     }
 
+
+
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
     public double calculateCost(Client client) {
         double cost= (getRentalTime()+1)*rentedVehicle.getPrice()*client.getDiscount(rentedVehicle);
-        return Math.round(cost*100.0)/100.0;
+        System.out.println(getRentalTime());
+        return (Math.round(cost*100.0)/100.0);
     }
 
-    public int getRentalTime() {
-        Period period= Period.between(startDate,endDate);
-        return period.getDays();
+    public long getRentalTime() {
+
+        return ChronoUnit.DAYS.between(startDate, endDate);
     }
 }

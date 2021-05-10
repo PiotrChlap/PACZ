@@ -38,6 +38,9 @@ public abstract class  Client {
     public void setLoyaltyPoints(int loyaltyPoints) {
         this.loyaltyPoints = loyaltyPoints;
     }
+    public void addLoyaltyPoints(int loyaltyPoints){
+        this.loyaltyPoints+=loyaltyPoints;
+    }
 
     public String getAddress() {
         return address;

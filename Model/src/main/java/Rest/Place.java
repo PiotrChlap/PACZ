@@ -9,6 +9,7 @@ public class Place {
     List<Vehicle> availbleCars;
     List<Vehicle> rentedCars;
 
+
     public Place() {
         this.availbleCars = new ArrayList<Vehicle>();
         this.rentedCars = new ArrayList<Vehicle>();
@@ -16,6 +17,9 @@ public class Place {
 
     public void addCar(Vehicle vehicle) {
         availbleCars.add(vehicle);
+    }
+    public void addCarRented(Vehicle vehicle) {
+        rentedCars.add(vehicle);
     }
     public void takeCar(Vehicle vehicle){
         rentedCars.remove(rentedCars.indexOf(vehicle));

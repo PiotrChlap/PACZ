@@ -57,7 +57,6 @@ public class AdminControll {
 
     public void setAdmin(Rest.admin admin) {
         this.admin = admin;
-        System.out.println("Ustawiono");
     }
 
     public void add_vechicle(ActionEvent actionEvent) throws IOException {
@@ -205,7 +204,6 @@ public class AdminControll {
             i+=1;
         }
 
-        System.out.println();
     }
 
 }

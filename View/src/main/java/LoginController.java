@@ -52,10 +52,6 @@ public class LoginController {
         ResultSet set = pst1.executeQuery(ask);
         String [] tabela = {"truck","special","sportPassCar","premiumPassCar","familyPassCar","chopper","cross_M","sportMotorcycle","touristMotorcycle"};
         while (set.next()){
-            System.out.println("LOGIN CONTROLLER");
-            System.out.println(LocalDate.parse(set.getString(3)));
-            System.out.println(LocalDate.now());
-            System.out.println(LocalDate.parse(set.getString(3)).isAfter(LocalDate.now()));
             if(!set.getBoolean(5)){
                 if(LocalDate.now().isAfter(LocalDate.parse(set.getString(3)))){
                     String query = "update rent set closed=true where id_r = "+ set.getInt(1);

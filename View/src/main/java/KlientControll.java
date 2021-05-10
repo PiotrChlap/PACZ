@@ -1,16 +1,17 @@
 import Client.Client;
 import Rest.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import vehicle.Car.*;
@@ -28,6 +29,12 @@ public class KlientControll {
     public Text infoOrders;
     @FXML
     public GridPane listaAvaibleCar;
+    @FXML
+    public ComboBox num_zamowienia;
+
+    ObservableList<String> listZamowienID = FXCollections
+            .observableArrayList("");
+
 
 
     private Client client;
@@ -49,6 +56,18 @@ public class KlientControll {
 
     public void setConn(Connection conn) {
         this.conn = conn;
+    }
+
+
+    @FXML
+    public void  refresh_num_zamowienia() throws SQLException, IOException {
+        zaladuj();
+        listZamowienID.clear();
+        System.out.println("??????????????????");
+        for(Order order: client.getListOfOrders()){
+            listZamowienID.add(String.valueOf(order.getId()));
+        }
+        num_zamowienia.setItems(listZamowienID);
     }
 
 
@@ -116,8 +135,6 @@ public class KlientControll {
         int [] tabela2 = {10,10,13,13,13,10,10,10,10};
         place.getAvailbleCars().clear();
         place.getRentedCars().clear();
-        System.out.println("__________________");
-        System.out.println(place.getRentedCars().size());
         for(int i =0 ; i<9; i++){
             String ask = "SELECT * FROM " + tabela[i];
             Statement pst1 = conn.createStatement();
@@ -208,9 +225,13 @@ public class KlientControll {
         }
         infoOrders.setText(client.getInfoOrders());
     }
-    public void create_invoice(ActionEvent actionEvent) {
-        Invoice invoice = new Invoice(1,client.findOrder(1).getSubmitDate().plusMonths(2),client.findOrder(1).getSubmitDate(),false,client.findOrder(1));
-        System.out.println(invoice.createInvoice());
+    public void create_invoice(ActionEvent actionEvent) throws IOException, SQLException {
+        zaladuj();
+        CreaterFile createrFile = new CreaterFile();
+
+        Invoice invoice = new Invoice(1,client.findOrder(Integer.parseInt((String) num_zamowienia.getValue())).getSubmitDate().plusMonths(2),client.findOrder(Integer.parseInt((String) num_zamowienia.getValue())).
+                getSubmitDate(),false,client.findOrder(Integer.parseInt((String) num_zamowienia.getValue())));
+        createrFile.createFile(invoice,client.getId(), client.findOrder(Integer.parseInt((String) num_zamowienia.getValue())).getId());
     }
 
     public void fillLista() throws SQLException, IOException {
@@ -238,4 +259,5 @@ public class KlientControll {
             i++;
         }
     }
+
 }

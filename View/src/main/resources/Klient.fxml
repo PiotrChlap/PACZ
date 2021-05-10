@@ -81,7 +81,7 @@
                   <Button layoutX="565.0" layoutY="10.0" mnemonicParsing="false" onAction="#zaladuj" text="Załaduj" />
                   <Button fx:id="new_order" layoutX="346.0" layoutY="10.0" mnemonicParsing="false" onAction="#new_order" text="Nowe zamówienie" />
                   <Button fx:id="create_invoice" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#create_invoice" prefHeight="26.0" prefWidth="110.0" text="Utwórz fakture" />
-                  <ComboBox layoutX="134.0" layoutY="10.0" prefWidth="150.0" promptText="nr zamówienia" />
+                  <ComboBox fx:id="num_zamowienia" layoutX="134.0" layoutY="10.0" onShown="#refresh_num_zamowienia" prefWidth="150.0" promptText="nr zamówienia" />
                </children>
             </AnchorPane>
          </bottom>

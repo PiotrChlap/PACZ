@@ -69,7 +69,6 @@ public class DodajZamowienieController {
 
 
     public void add_vehicle(ActionEvent actionEvent) throws SQLException {
-        System.out.println(day.getValue() + "." + month.getValue()+"."+year.getText());
         String ask = "SELECT max(id_r) FROM rent ";
         Statement pst1 = conn.createStatement();
         ResultSet set = pst1.executeQuery(ask);
@@ -125,7 +124,6 @@ public class DodajZamowienieController {
     @FXML
     public void refresh(){
         avaibleCar.clear();
-        System.out.println(place.getInfoAvailbeCars());
         for(Vehicle vehicle : place.getAvailbleCars()){
             avaibleCar.add(String.valueOf(vehicle.getCarId()));
         }

@@ -1,3 +1,4 @@
+import Rest.DataBaseMenager;
 import Rest.Place;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,11 @@ public class DodajPojazdController {
 
     private Place place;
     private Connection conn;
+    private DataBaseMenager dataBaseMenager;
+
+    public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
+        this.dataBaseMenager = dataBaseMenager;
+    }
 
     public void setConn(Connection conn) {
         this.conn = conn;
@@ -30,6 +36,7 @@ public class DodajPojazdController {
         LuksusoweAutoController luksusoweAutoController = loader.getController();
         luksusoweAutoController.setPlace(place);
         luksusoweAutoController.setConn(conn);
+        luksusoweAutoController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Luksusowe Auto");
         stage.setScene(new Scene(root));
@@ -44,6 +51,7 @@ public class DodajPojazdController {
         RodzinneAutoController rodzinneAutoController = loader.getController();
         rodzinneAutoController.setPlace(place);
         rodzinneAutoController.setConn(conn);
+        rodzinneAutoController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Rodzinne Auto");
         stage.setScene(new Scene(root));
@@ -58,6 +66,7 @@ public class DodajPojazdController {
         SportoweAutoController sportoweAutoController  = loader.getController();
         sportoweAutoController.setPlace(place);
         sportoweAutoController.setConn(conn);
+        sportoweAutoController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Sportowe Auto");
         stage.setScene(new Scene(root));
@@ -72,6 +81,7 @@ public class DodajPojazdController {
         CiezarowkaController ciezarowkaController  = loader.getController();
         ciezarowkaController.setPlace(place);
         ciezarowkaController.setConn(conn);
+        ciezarowkaController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Ciezarowka");
         stage.setScene(new Scene(root));
@@ -86,6 +96,7 @@ public class DodajPojazdController {
         AutoSpecjalneController autoSpecjalneController  = loader.getController();
         autoSpecjalneController.setPlace(place);
         autoSpecjalneController.setConn(conn);
+        autoSpecjalneController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Auto Specjalne");
         stage.setScene(new Scene(root));
@@ -100,6 +111,7 @@ public class DodajPojazdController {
         SportowyMotocyklController sportowyMotocyklController  = loader.getController();
         sportowyMotocyklController.setPlace(place);
         sportowyMotocyklController.setConn(conn);
+        sportowyMotocyklController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Sportowy Motocykl");
         stage.setScene(new Scene(root));
@@ -114,6 +126,7 @@ public class DodajPojazdController {
         MotocyklTurystycznyController motocyklTurystycznyController  = loader.getController();
         motocyklTurystycznyController.setPlace(place);
         motocyklTurystycznyController.setConn(conn);
+        motocyklTurystycznyController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Motocykl Turystyczny");
         stage.setScene(new Scene(root));
@@ -128,6 +141,7 @@ public class DodajPojazdController {
         ChopperController chopperController  = loader.getController();
         chopperController.setPlace(place);
         chopperController.setConn(conn);
+        chopperController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Chopper");
         stage.setScene(new Scene(root));
@@ -142,6 +156,7 @@ public class DodajPojazdController {
         CrossController crossController  = loader.getController();
         crossController.setPlace(place);
         crossController.setConn(conn);
+        crossController.setDataBaseMenager(dataBaseMenager);
         Stage stage = new Stage();
         stage.setTitle("Cross");
         stage.setScene(new Scene(root));

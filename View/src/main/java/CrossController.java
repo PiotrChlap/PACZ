@@ -1,3 +1,4 @@
+import Rest.DataBaseMenager;
 import Rest.Place;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CrossController {
     public Button go_back;
@@ -47,7 +50,11 @@ public class CrossController {
     @FXML
     private TextField MomentObrotowy;
     private Connection conn;
+    private DataBaseMenager dataBaseMenager;
 
+    public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
+        this.dataBaseMenager = dataBaseMenager;
+    }
     public void setConn(Connection conn) {
         this.conn = conn;
     }
@@ -62,49 +69,62 @@ public class CrossController {
 
     public void add_vechicle(ActionEvent actionEvent) throws SQLException {
 
-        boolean tmp;
-        if(SkrzyniaBiegowBox.getValue().equals("Tak")){
-            tmp=true;
-        } else {
-            tmp=false;
-        }
+//        boolean tmp;
+//        if(SkrzyniaBiegowBox.getValue().equals("Tak")){
+//            tmp=true;
+//        } else {
+//            tmp=false;
+//        }
+//
+//        String ask ="SELECT max(idx) FROM  (SELECT id_t as idx FROM special UNION ALL\n" +
+//                "SELECT id_t as idx FROM truck\n" +
+//                "UNION ALL\n" +
+//                "SELECT id_t as idx FROM  sportPassCar\n" +
+//                "UNION ALL\n" +
+//                "SELECT id_t as idx FROM premiumPassCar\n" +
+//                "UNION ALL\n" +
+//                "SELECT id_t as idx FROM familyPassCar\n" +
+//                "UNION ALL\n" +
+//                "SELECT id_t as idx FROM chopper\n" +
+//                "UNION ALL\n" +
+//                "SELECT id_t as idx FROM cross_M\n" +
+//                "UNION ALL\n" +
+//                "SELECT id_t as idx FROM sportMotorcycle\n" +
+//                "UNION ALL\n" +
+//                "SELECT id_t as idx FROM touristMotorcycle) as t";
+//        Statement pst1 = conn.createStatement();
+//        ResultSet set = pst1.executeQuery(ask);
+//        int data = 0;
+//        while (set.next()) {
+//            data = set.getInt(1);
+//        }
+//
+//        String query = "INSERT INTO cross_M values(?,?,?,?,?,?, ?,?,?,?)";
+//        PreparedStatement pst = conn.prepareStatement(query);
+//        pst.setInt(1, data + 1);
+//        pst.setString(2, marka.getText());
+//        pst.setString(3, model.getText());
+//        pst.setFloat(4, Float.parseFloat(pojemnosc.getText()));
+//        pst.setInt(5, Integer.parseInt(MocSilnika.getText()));
+//        pst.setBoolean(6, tmp);
+//        pst.setInt(7, Integer.parseInt(Cena.getText()));
+//        pst.setInt(8, Integer.parseInt(RokProdukcji.getText()));
+//        pst.setString(9,(String) TypNapeduBox.getValue());
+//        pst.setInt(10,Integer.parseInt(MomentObrotowy.getText()));
+//        pst.executeUpdate();
 
-        String ask ="SELECT max(idx) FROM  (SELECT id_t as idx FROM special UNION ALL\n" +
-                "SELECT id_t as idx FROM truck\n" +
-                "UNION ALL\n" +
-                "SELECT id_t as idx FROM  sportPassCar\n" +
-                "UNION ALL\n" +
-                "SELECT id_t as idx FROM premiumPassCar\n" +
-                "UNION ALL\n" +
-                "SELECT id_t as idx FROM familyPassCar\n" +
-                "UNION ALL\n" +
-                "SELECT id_t as idx FROM chopper\n" +
-                "UNION ALL\n" +
-                "SELECT id_t as idx FROM cross_M\n" +
-                "UNION ALL\n" +
-                "SELECT id_t as idx FROM sportMotorcycle\n" +
-                "UNION ALL\n" +
-                "SELECT id_t as idx FROM touristMotorcycle) as t";
-        Statement pst1 = conn.createStatement();
-        ResultSet set = pst1.executeQuery(ask);
-        int data = 0;
-        while (set.next()) {
-            data = set.getInt(1);
-        }
-
-        String query = "INSERT INTO cross_M values(?,?,?,?,?,?, ?,?,?,?)";
-        PreparedStatement pst = conn.prepareStatement(query);
-        pst.setInt(1, data + 1);
-        pst.setString(2, marka.getText());
-        pst.setString(3, model.getText());
-        pst.setFloat(4, Float.parseFloat(pojemnosc.getText()));
-        pst.setInt(5, Integer.parseInt(MocSilnika.getText()));
-        pst.setBoolean(6, tmp);
-        pst.setInt(7, Integer.parseInt(Cena.getText()));
-        pst.setInt(8, Integer.parseInt(RokProdukcji.getText()));
-        pst.setString(9,(String) TypNapeduBox.getValue());
-        pst.setInt(10,Integer.parseInt(MomentObrotowy.getText()));
-        pst.executeUpdate();
+        List<String> arg = new ArrayList<>();
+        arg.add(marka.getText());
+        arg.add(model.getText());
+        arg.add(pojemnosc.getText());
+        arg.add(MocSilnika.getText());
+        arg.add((String) SkrzyniaBiegowBox.getValue());
+        arg.add(Cena.getText());
+        arg.add(RokProdukcji.getText());
+        arg.add((String) TypNapeduBox.getValue());
+        arg.add(MomentObrotowy.getText());
+        dataBaseMenager.addNewCross(arg);
+        dataBaseMenager.updatePlaceDataBase(place);
     }
 
     public void go_back(ActionEvent actionEvent) throws IOException {

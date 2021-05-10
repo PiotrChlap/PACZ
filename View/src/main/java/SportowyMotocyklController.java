@@ -1,3 +1,4 @@
+import Rest.DataBaseMenager;
 import Rest.Place;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,7 +48,11 @@ public class SportowyMotocyklController {
     @FXML
     private TextField MaksPredkosc;
     private Connection conn;
+    private DataBaseMenager dataBaseMenager;
 
+    public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
+        this.dataBaseMenager = dataBaseMenager;
+    }
     public void setConn(Connection conn) {
         this.conn = conn;
     }

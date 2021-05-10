@@ -1,3 +1,4 @@
+import Rest.DataBaseMenager;
 import Rest.Place;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +25,12 @@ public class RodzinneAutoController {
     ObservableList<String> TypAutaLista= FXCollections
             .observableArrayList("miniVan", "Van", "Kombi", "SUV", "KombiVan");
     private Place place;
+    private Connection conn;
+    private DataBaseMenager dataBaseMenager;
+
+    public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
+        this.dataBaseMenager = dataBaseMenager;
+    }
 
     public void setPlace(Place place) {
         this.place = place;
@@ -54,7 +61,7 @@ public class RodzinneAutoController {
     private TextField IloscSiedzenDlaDziecka;
     @FXML
     private ComboBox ZapasoweKolo;
-    private Connection conn;
+
 
     public void setConn(Connection conn) {
         this.conn = conn;

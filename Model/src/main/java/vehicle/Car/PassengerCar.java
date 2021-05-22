@@ -3,7 +3,7 @@ package vehicle.Car;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public abstract class PassengerCar extends Car{
-    private int numOfSeats;
+    protected int numOfSeats;
 
     public PassengerCar(int id,String marka, String model, float capacity, int power, boolean automaticGearbox, int basicPrice, int yearOfProduction, int numOfDoors, int numOfSeats) {
         super(id,marka, model, capacity, power, automaticGearbox, basicPrice, yearOfProduction, numOfDoors );

@@ -3,7 +3,7 @@ package vehicle.Motorcycle;
 import vehicle.Vehicle;
 
 public abstract class Motorcycle extends Vehicle {
-    private driveTypeMotorcycle driveType;
+    protected driveTypeMotorcycle driveType;
 
     public Motorcycle(int id,String marka, String model, float capacity, int power, boolean automaticGearbox, int basicPrice, int yearOfProduction, driveTypeMotorcycle driveType) {
         super(id,marka, model, capacity, power, automaticGearbox, basicPrice, yearOfProduction );

@@ -41,7 +41,7 @@ public class Rent {
     }
 
     public String getInfo() {
-        String tmp="Id: "+rentId+" Czas rozpoczęcia: " +startDate+ " Czas zakończenia: " +endDate+". Wypożyczone auto: " + rentedVehicle.getInfoCar();
+        String tmp="Id: "+rentId+" Czas rozpoczęcia: " +startDate+ " Czas zakończenia: " +endDate+".\n\t Wypożyczone auto: " + rentedVehicle.getInfoCar();
         return tmp;
     }
 
@@ -53,7 +53,6 @@ public class Rent {
 
     public double calculateCost(Client client) {
         double cost= (getRentalTime()+1)*rentedVehicle.getPrice()*client.getDiscount(rentedVehicle);
-        System.out.println(getRentalTime());
         return (Math.round(cost*100.0)/100.0);
     }
 

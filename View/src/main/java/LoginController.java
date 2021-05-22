@@ -39,8 +39,8 @@ public class LoginController {
 
     @FXML
     public void initialize() throws SQLException {
-        DAO dao = new DAO();
-        conn = dao.connect();
+//        DAO dao = new DAO();
+//        conn = dao.connect();
         place = new Place();
         controller = new Controller(place);
         dataBaseMenager= new DataBaseMenager();
@@ -151,6 +151,7 @@ public class LoginController {
             klientControll.setPlace(place);
             klientControll.setController(controller);
             klientControll.setClient(client);
+            klientControll.setDataBaseMenager(dataBaseMenager);
             Stage stage = new Stage();
             stage.setTitle("Klient");
             stage.setScene(new Scene(root));
@@ -163,27 +164,6 @@ public class LoginController {
     }
 
     public void log_admin(ActionEvent actionEvent) throws IOException, SQLException {
-//        String ask = "SELECT pass_admin FROM admin";
-//        Statement pst1 = conn.createStatement();
-//        ResultSet set = pst1.executeQuery(ask);
-//        String base_haslo="";
-//        while(set.next()){
-//            base_haslo = set.getString(1);
-//        }
-//        if(admin_pass.getText().equals(base_haslo)) {
-//            FXMLLoader  loader = new FXMLLoader(getClass().getResource("/Admin.fxml"));
-//            Parent root = (Parent) loader.load();
-//            Stage stage = new Stage();
-//            stage.setTitle("Administracja");
-//            stage.setScene(new Scene(root));
-//            AdminControll adminControll = loader.getController();
-//            adminControll.setAdmin(new admin(admin_pass.getText()));
-//            adminControll.setPlace(place);
-//            adminControll.setConn(conn);
-//            stage.show();
-//            stage = (Stage) log_in_admin.getScene().getWindow();
-//            stage.close();
-//        }
         admin admin = dataBaseMenager.getAdminBase(admin_pass.getText());
         if(admin != null){
             FXMLLoader  loader = new FXMLLoader(getClass().getResource("/Admin.fxml"));

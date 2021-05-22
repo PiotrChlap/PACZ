@@ -77,10 +77,11 @@ public class Order {
         for( int i=0; i<listOfRents.size();i++) {
             tmp.append(i+1);
             tmp.append(". Wypożyczenie: \n");
+            tmp.append("\t");
             tmp.append(listOfRents.get(i).getInfo());
-            tmp.append("\n");
+            tmp.append("\n\t");
             tmp.append("Koszt: ");
-            tmp.append("\n");
+            tmp.append("\n\t");
             tmp.append(listOfRents.get(i).calculateCost(client));
             tmp.append("\n");
         }

@@ -218,6 +218,96 @@ public class DataBaseMenager {
         }
     }
 
+    public  void addNewOrder(Client client, Order order){
+        try{
+            String query = "INSERT INTO order_o values(?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, order.getId());
+            pst.setString(2, order.getSubmitDate().toString());
+            pst.setInt(3, client.getId());
+            pst.executeUpdate();
+        } catch (SQLException e){
+
+        }
+    }
+
+    public void  addNewRent(int data, Rent rent, Order order, String car_id){
+        try {
+            String query = "INSERT INTO rent values(?,?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, data + 1);
+            pst.setString(2, rent.getStartDate().toString());
+            pst.setString(3, rent.getEndDate().toString());
+            pst.setInt(4, order.getId());
+            pst.setBoolean(5, false);
+            pst.setInt(6,Integer.parseInt(car_id));
+            pst.executeUpdate();
+        } catch (SQLException e){
+
+        }
+    }
+
+    public int getMaxIDRent(){
+        int data=1;
+        try{
+            String ask = "SELECT max(id_r) FROM rent ";
+            Statement pst1 = conn.createStatement();
+            ResultSet set = pst1.executeQuery(ask);
+            while (set.next()){
+                data=set.getInt(1);
+            }
+        } catch (SQLException e){
+
+        }
+        return data;
+    }
+
+    public void  RentCarUpdate(String base,String car_id ){
+        try {
+            String query1 = "update " + base+ " set rented=TRUE where id_t=" + Integer.parseInt(car_id);
+            PreparedStatement pst2 = conn.prepareStatement(query1);
+            pst2.executeUpdate();
+        } catch (SQLException e){
+
+        }
+    }
+
+    public  int  getMaxIDOrder(){
+        int data=1;
+        try {
+            String ask = "SELECT max(id_o) FROM order_o ";
+            Statement pst1 = conn.createStatement();
+            ResultSet set = pst1.executeQuery(ask);
+            while (set.next()){
+                data=set.getInt(1);
+            }
+        } catch (SQLException e){
+
+        }
+        return data;
+    }
+
+    public void updateOrders(Client client, Place place){
+        try{
+            String ask = "SELECT * FROM order_o where id_c=" +client.getId();
+            Statement pst1 = conn.createStatement();
+            ResultSet set = pst1.executeQuery(ask);
+            client.getListOfOrders().clear();
+            while(set.next()) {
+                Order order =new Order(set.getInt(1),LocalDate.parse(set.getString(2)),client);
+                client.addOrder(order);
+                String ask2 = "SELECT * FROM rent where id_c=" +set.getInt(1);
+                Statement pst2 = conn.createStatement();
+                ResultSet set2 = pst2.executeQuery(ask2);
+                while (set2.next()){
+                    order.addRent(new Rent(set2.getInt(1),LocalDate.parse(set2.getString(2)),LocalDate.parse(set2.getString(3)),place.getVehicle(set2.getInt(6))));
+                }
+            }
+        } catch (SQLException e){
+
+        }
+    }
+
     public int getHighestIDVehicle(){
         int data = 0;
         try {
@@ -408,6 +498,108 @@ public class DataBaseMenager {
                 tmp=false;
             }
             String query = "INSERT INTO touristMotorcycle values(?,?,?,?,?,?, ?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, getHighestIDVehicle() + 1);
+            pst.setString(2, arg.get(0));
+            pst.setString(3,  arg.get(1));
+            pst.setFloat(4, Float.parseFloat( arg.get(2)));
+            pst.setInt(5, Integer.parseInt( arg.get(3)));
+            pst.setBoolean(6, tmp);
+            pst.setInt(7, Integer.parseInt(arg.get(5)));
+            pst.setInt(8, Integer.parseInt(arg.get(6)));
+            pst.setString(9,arg.get(7));
+            pst.setInt(10,Integer.parseInt(arg.get(8)));
+            pst.executeUpdate();
+        } catch (SQLException e){
+
+        }
+    }
+
+    public void addNewFamilyCar(List<String> arg){
+        try {
+            boolean tmp;
+            boolean a;
+            if(arg.get(4).equals("Tak")){
+                tmp=true;
+            } else {
+                tmp=false;
+            }
+            if(arg.get(11).equals("Tak")){
+                a=true;
+            } else {
+                a=false;
+            }
+            String query = "INSERT INTO familyPassCar values(?,?,?,?,?,?, ?,?,?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, getHighestIDVehicle() + 1);
+            pst.setString(2, arg.get(0));
+            pst.setString(3,  arg.get(1));
+            pst.setFloat(4, Float.parseFloat( arg.get(2)));
+            pst.setInt(5, Integer.parseInt( arg.get(3)));
+            pst.setBoolean(6, tmp);
+            pst.setInt(7, Integer.parseInt(arg.get(5)));
+            pst.setInt(8, Integer.parseInt(arg.get(6)));
+            pst.setInt(9,Integer.parseInt(arg.get(7)));
+            pst.setInt(10,Integer.parseInt(arg.get(8)));
+            pst.setString(11, arg.get(9));
+            pst.setInt(12,Integer.parseInt(arg.get(10)));
+            pst.setBoolean(13,a);
+            pst.executeUpdate();
+        } catch (SQLException e){
+
+        }
+    }
+
+    public void addNewSportCar(List<String> arg){
+        try {
+            boolean tmp;
+            boolean a;
+            boolean b;
+            if(arg.get(4).equals("Tak")){
+                tmp=true;
+            } else {
+                tmp=false;
+            }
+            if(arg.get(9).equals("Tak")){
+                a=true;
+            } else {
+                a=false;
+            }
+            if(arg.get(10).equals("Tak")){
+                b=true;
+            } else {
+                b=false;
+            }
+            String query = "INSERT INTO sportPassCar values(?,?,?,?,?,?, ?,?,?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, getHighestIDVehicle() + 1);
+            pst.setString(2, arg.get(0));
+            pst.setString(3,  arg.get(1));
+            pst.setFloat(4, Float.parseFloat( arg.get(2)));
+            pst.setInt(5, Integer.parseInt( arg.get(3)));
+            pst.setBoolean(6, tmp);
+            pst.setInt(7, Integer.parseInt(arg.get(5)));
+            pst.setInt(8, Integer.parseInt(arg.get(6)));
+            pst.setInt(9,Integer.parseInt(arg.get(7)));
+            pst.setInt(10,Integer.parseInt(arg.get(8)));
+            pst.setBoolean(11, a);
+            pst.setBoolean(12,b);
+            pst.setInt(13,Integer.parseInt(arg.get(11)));
+            pst.executeUpdate();
+        } catch (SQLException e){
+
+        }
+    }
+
+    public void addNewSportMotor(List<String> arg){
+        try {
+            boolean tmp;
+            if(arg.get(4).equals("Tak")){
+                tmp=true;
+            } else {
+                tmp=false;
+            }
+            String query = "INSERT INTO sportMotorcycle values(?,?,?,?,?,?, ?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
             pst.setString(2, arg.get(0));

@@ -3,7 +3,7 @@ package vehicle.Car;
 import vehicle.Vehicle;
 
 public abstract class Car extends Vehicle {
-    private int numOfDoors;
+    protected int numOfDoors;
 
     public Car(int id,String marka, String model, float capacity, int power, boolean automaticGearbox, int basicPrice, int yearOfProduction, int numOfDoors) {
         super(id, marka, model, capacity, power, automaticGearbox, basicPrice, yearOfProduction );
@@ -21,6 +21,7 @@ public abstract class Car extends Vehicle {
         }
     }
 
+    @Override
     public String getInfoCar() {
         String tmp = super.getInfoCar() + ", Liczba drzwi: "+ numOfDoors;
         return tmp;

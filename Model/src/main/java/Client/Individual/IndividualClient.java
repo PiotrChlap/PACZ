@@ -58,6 +58,6 @@ public abstract class IndividualClient extends Client{
         tmp.append("\n");
         tmp.append(getPersonalIdNum());
         tmp.append("\n");
-        return tmp.toString()+super.getBasedInfo();
+        return tmp +super.getBasedInfo();
     }
 }

@@ -64,10 +64,10 @@ import vehicle.Vehicle;
     @Override
     public String getBasedInfo(){
         StringBuilder tmp = new StringBuilder();
-        tmp.append(nameCompany);
+        tmp.append(getNameCompany());
         tmp.append("\n");
         tmp.append(getTaxNumber());
         tmp.append("\n");
-        return tmp.toString()+super.getBasedInfo();
+        return tmp +super.getBasedInfo();
     }
 }

@@ -3,7 +3,7 @@ package Rest;
 import vehicle.Vehicle;
 
 public class Controller {
-    private Place place;
+    private final Place place;
 
     public Controller(Place place) {
         this.place = place;

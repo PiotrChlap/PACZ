@@ -28,12 +28,6 @@ public class ChopperController {
 
     private Place place;
 
-    public void setPlace(Place place) {
-        this.place = place;
-    }
-
-    @FXML
-    private TextField PoleID;
     @FXML
     private TextField marka;
     @FXML
@@ -54,6 +48,10 @@ public class ChopperController {
     private TextField Dlugosc;
     private Connection conn;
     private DataBaseMenager dataBaseMenager;
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
 
     public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
         this.dataBaseMenager = dataBaseMenager;

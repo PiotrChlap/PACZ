@@ -29,16 +29,6 @@ public class RodzinneAutoController {
     private Place place;
     private Connection conn;
     private DataBaseMenager dataBaseMenager;
-
-    public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
-        this.dataBaseMenager = dataBaseMenager;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
-    }
-    @FXML
-    private TextField PoleID;
     @FXML
     private TextField marka;
     @FXML
@@ -64,6 +54,14 @@ public class RodzinneAutoController {
     @FXML
     private ComboBox ZapasoweKolo;
 
+    public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
+        this.dataBaseMenager = dataBaseMenager;
+    }
+
+    public void setPlace(Place place) {
+        this.place = place;
+    }
+
 
     public void setConn(Connection conn) {
         this.conn = conn;
@@ -81,61 +79,6 @@ public class RodzinneAutoController {
     }
 
     public void add_vehicle(ActionEvent actionEvent) throws SQLException {
-//        boolean tmp;
-//        boolean a;
-//        boolean d;
-//        boolean b;
-//        if(SkrzyniaBiegowBox.getValue().equals("Tak")){
-//            tmp=true;
-//        } else {
-//            tmp=false;
-//        }
-//
-//        if(ZapasoweKolo.getValue().equals("Tak")){
-//            a=true;
-//        } else {
-//            a=false;
-//        }
-//
-//        String ask ="SELECT max(idx) FROM  (SELECT id_t as idx FROM special UNION ALL\n" +
-//                "SELECT id_t as idx FROM truck\n" +
-//                "UNION ALL\n" +
-//                "SELECT id_t as idx FROM  sportPassCar\n" +
-//                "UNION ALL\n" +
-//                "SELECT id_t as idx FROM premiumPassCar\n" +
-//                "UNION ALL\n" +
-//                "SELECT id_t as idx FROM familyPassCar\n" +
-//                "UNION ALL\n" +
-//                "SELECT id_t as idx FROM chopper\n" +
-//                "UNION ALL\n" +
-//                "SELECT id_t as idx FROM cross_M\n" +
-//                "UNION ALL\n" +
-//                "SELECT id_t as idx FROM sportMotorcycle\n" +
-//                "UNION ALL\n" +
-//                "SELECT id_t as idx FROM touristMotorcycle) as t";
-//        Statement pst1 = conn.createStatement();
-//        ResultSet set = pst1.executeQuery(ask);
-//        int data = 0;
-//        while (set.next()) {
-//            data = set.getInt(1);
-//        }
-//
-//        String query = "INSERT INTO familyPassCar values(?,?,?,?,?,?, ?,?,?,?,?,?,?)";
-//        PreparedStatement pst = conn.prepareStatement(query);
-//        pst.setInt(1, data + 1);
-//        pst.setString(2, marka.getText());
-//        pst.setString(3, model.getText());
-//        pst.setFloat(4, Float.parseFloat(pojemnosc.getText()));
-//        pst.setInt(5, Integer.parseInt(MocSilnika.getText()));
-//        pst.setBoolean(6, tmp);
-//        pst.setInt(7, Integer.parseInt(Cena.getText()));
-//        pst.setInt(8, Integer.parseInt(RokProdukcji.getText()));
-//        pst.setInt(9,Integer.parseInt(LiczbaDrzwi.getText()));
-//        pst.setInt(10,Integer.parseInt(LiczbaSiedzen.getText()));
-//        pst.setString(11, (String) TypAuta.getValue());
-//        pst.setInt(12,Integer.parseInt(IloscSiedzenDlaDziecka.getText()));
-//        pst.setBoolean(13,a);
-//        pst.executeUpdate();
         List<String> arg = new ArrayList<>();
         arg.add(marka.getText());
         arg.add(model.getText());

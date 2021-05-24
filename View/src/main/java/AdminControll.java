@@ -34,21 +34,16 @@ public class AdminControll {
     public Button log_out;
     private Rest.admin admin;
     private Place place;
-    private Connection conn;
     @FXML
     private GridPane avaibleCarPane;
     @FXML
     private GridPane rentedCarPane;
     private DataBaseMenager dataBaseMenager;
-    private  boolean x =false;
 
     public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
         this.dataBaseMenager = dataBaseMenager;
     }
 
-    public void setConn(Connection conn) {
-        this.conn = conn;
-    }
 
     public void setPlace(Place place) {
         this.place = place;
@@ -64,7 +59,6 @@ public class AdminControll {
         Stage stage = new Stage();
         DodajPojazdController dodajPojazdController = loader.getController();
         dodajPojazdController.setPlace(place);
-        dodajPojazdController.setConn(conn);
         dodajPojazdController.setDataBaseMenager(dataBaseMenager);
         stage.setTitle("Dodaj_Pojazd");
         stage.initModality(Modality.WINDOW_MODAL);
@@ -84,7 +78,7 @@ public class AdminControll {
 
     public void more_info(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/WiecejInformacji.fxml"));
-        Parent root = (Parent) loader.load();
+        Parent root = loader.load();
         Stage stage = new Stage();
         WiecejInformacjiController wiecejInformacjiController = loader.getController();
         wiecejInformacjiController.setId(Integer.parseInt(car_ID.getText()));

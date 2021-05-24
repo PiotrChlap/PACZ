@@ -11,6 +11,7 @@ public class Special extends Car{
     public void setType(String type) {
         this.type = type;
     }
+
     public double getPrice(){
         return super.getPrice()*1.5;
     }
@@ -19,6 +20,7 @@ public class Special extends Car{
         String tmp= super.getInfoCar()+", Typ: " + type;
         return tmp;
     }
+
     public String getType() {
         return type;
     }

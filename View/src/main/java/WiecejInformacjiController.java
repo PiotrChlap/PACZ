@@ -13,8 +13,7 @@ import vehicle.Motorcycle.TouristMotorcycle;
 import vehicle.Vehicle;
 
 public class WiecejInformacjiController {
-    public Button quit;
-
+    private Button quit;
 
     @FXML
     private GridPane infobase;

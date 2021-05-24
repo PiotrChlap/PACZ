@@ -22,12 +22,12 @@ public class Place {
         rentedCars.add(vehicle);
     }
     public void takeCar(Vehicle vehicle){
-        rentedCars.remove(rentedCars.indexOf(vehicle));
+        rentedCars.remove(vehicle);
         availbleCars.add(vehicle);
     }
 
     public void handOverCar(Vehicle vehicle){
-        availbleCars.remove(availbleCars.indexOf(vehicle));
+        availbleCars.remove(vehicle);
         rentedCars.add(vehicle);
 
     }

@@ -23,19 +23,19 @@ import java.sql.*;
 import java.time.LocalDate;
 
 public class KlientControll {
-    public Button log_out;
-    public TextField car_ID;
     @FXML
-    public Text infoOrders;
+    private Button log_out;
     @FXML
-    public GridPane listaAvaibleCar;
+    private TextField car_ID;
     @FXML
-    public ComboBox num_zamowienia;
+    private Text infoOrders;
+    @FXML
+    private GridPane listaAvaibleCar;
+    @FXML
+    private ComboBox num_zamowienia;
 
     ObservableList<String> listZamowienID = FXCollections
             .observableArrayList("");
-
-
 
     private Client client;
     private Place place;
@@ -82,15 +82,6 @@ public class KlientControll {
         client.setController(controller);
         dodajZamowienieController.setClient(client);
         dodajZamowienieController.setConn(conn);
-
-//        String ask = "SELECT max(id_o) FROM order_o ";
-//        Statement pst1 = conn.createStatement();
-//        ResultSet set = pst1.executeQuery(ask);
-//        int data=1;
-//        while (set.next()){
-//            data=set.getInt(1);
-//        }
-
         int data = dataBaseMenager.getMaxIDOrder();
         zaladuj();
 
@@ -99,13 +90,6 @@ public class KlientControll {
         dodajZamowienieController.setPlace(place);
         dodajZamowienieController.setDataBaseMenager(dataBaseMenager);
         client.addOrder(order);
-
-//        String query = "INSERT INTO order_o values(?,?,?)";
-//        PreparedStatement pst = conn.prepareStatement(query);
-//        pst.setInt(1, order.getId());
-//        pst.setString(2, order.getSubmitDate().toString());
-//        pst.setInt(3, client.getId());
-//        pst.executeUpdate();
         dataBaseMenager.addNewOrder(client,order);
 
 
@@ -124,13 +108,6 @@ public class KlientControll {
         stage.show();
     }
 
-    public void edit_order(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/EdytujZamowienie.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Login");
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
 
     public void log_out(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
@@ -143,98 +120,6 @@ public class KlientControll {
     }
 
     public void zaladuj() throws IOException, SQLException {
-//        String [] tabela = {"truck","special","sportPassCar","premiumPassCar","familyPassCar","chopper","cross_M","sportMotorcycle","touristMotorcycle"};
-//        int [] tabela2 = {10,10,13,13,13,10,10,10,10};
-//        place.getAvailbleCars().clear();
-//        place.getRentedCars().clear();
-//        for(int i =0 ; i<9; i++){
-//            String ask = "SELECT * FROM " + tabela[i];
-//            Statement pst1 = conn.createStatement();
-//            ResultSet set = pst1.executeQuery(ask);
-//            int j =0;
-//            while(set.next()) {
-//                String [] tmp = new String[tabela2[i]+1];
-//                for(int z=0; z<tabela2[i]+1;z++) {
-//                    tmp[z]=set.getString(z+1);
-//                }
-//                if(!set.getBoolean(tmp.length)){
-//                    if(tabela[i].equals("truck")){
-//                        place.addCar(new Truck(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9])));
-//                    } else if (tabela[i].equals("special")) {
-//                        place.addCar(new Special(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),tmp[9]));
-//                    } else if (tabela[i].equals("sportPassCar")) {
-//                        place.addCar(new SportPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Integer.parseInt(tmp[12])));
-//                    } else if (tabela[i].equals("premiumPassCar")) {
-//                        place.addCar(new PremiumPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Boolean.parseBoolean(tmp[12])));
-//                    } else if (tabela[i].equals("familyPassCar")) {
-//                        place.addCar(new FamilyPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),typeFamilyCar.valueOf(tmp[10]),Integer.parseInt(tmp[11]),Boolean.parseBoolean(tmp[12])));
-//                    } else if (tabela[i].equals("chopper")) {
-//                        place.addCar(new Chopper(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                driveTypeMotorcycle.valueOf(tmp[8]),Float.parseFloat(tmp[9])));
-//                    } else if (tabela[i].equals("cross_M")) {
-//                        place.addCar(new Cross(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
-//                    } else if (tabela[i].equals("sportMotorcycle")) {
-//                        place.addCar(new SportMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
-//                    } else {
-//                        place.addCar(new TouristMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
-//                    }
-//                }
-//                else {
-//                    if(tabela[i].equals("truck")){
-//                        place.addCarRented(new Truck(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9])));
-//                    } else if (tabela[i].equals("special")) {
-//                        place.addCarRented(new Special(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),tmp[9]));
-//                    } else if (tabela[i].equals("sportPassCar")) {
-//                        place.addCarRented(new SportPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Integer.parseInt(tmp[12])));
-//                    } else if (tabela[i].equals("premiumPassCar")) {
-//                        place.addCarRented(new PremiumPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),Boolean.parseBoolean(tmp[10]),Boolean.parseBoolean(tmp[11]),Boolean.parseBoolean(tmp[12])));
-//                    } else if (tabela[i].equals("familyPassCar")) {
-//                        place.addCarRented(new FamilyPassCar(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                Integer.parseInt(tmp[8]),Integer.parseInt(tmp[9]),typeFamilyCar.valueOf(tmp[10]),Integer.parseInt(tmp[11]),Boolean.parseBoolean(tmp[12])));
-//                    } else if (tabela[i].equals("chopper")) {
-//                        place.addCarRented(new Chopper(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                driveTypeMotorcycle.valueOf(tmp[8]),Float.parseFloat(tmp[9])));
-//                    } else if (tabela[i].equals("cross_M")) {
-//                        place.addCarRented(new Cross(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
-//                    } else if (tabela[i].equals("sportMotorcycle")) {
-//                        place.addCarRented(new SportMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
-//                    } else {
-//                        place.addCarRented(new TouristMotorcycle(Integer.parseInt(tmp[0]),tmp[1],tmp[2],Float.parseFloat(tmp[3]),Integer.parseInt(tmp[4]),Boolean.parseBoolean(tmp[5]),Integer.parseInt(tmp[6]),Integer.parseInt(tmp[7]),
-//                                driveTypeMotorcycle.valueOf(tmp[8]),Integer.parseInt(tmp[9])));
-//                    }
-//                }
-//
-//            }
-//        }
-
-//        String ask = "SELECT * FROM order_o where id_c=" +client.getId();
-//        Statement pst1 = conn.createStatement();
-//        ResultSet set = pst1.executeQuery(ask);
-//        client.getListOfOrders().clear();
-//        while(set.next()) {
-//            Order order =new Order(set.getInt(1),LocalDate.parse(set.getString(2)),client);
-//            client.addOrder(order);
-//            String ask2 = "SELECT * FROM rent where id_c=" +set.getInt(1);
-//            Statement pst2 = conn.createStatement();
-//            ResultSet set2 = pst2.executeQuery(ask2);
-//            while (set2.next()){
-//                order.addRent(new Rent(set2.getInt(1),LocalDate.parse(set2.getString(2)),LocalDate.parse(set2.getString(3)),place.getVehicle(set2.getInt(6))));
-//            }
-//        }
         dataBaseMenager.updatePlaceDataBase(place);
         dataBaseMenager.updateOrders(client, place);
         infoOrders.setText(client.getInfoOrders());

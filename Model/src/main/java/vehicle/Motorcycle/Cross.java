@@ -9,6 +9,7 @@ public class Cross extends Motorcycle{
         this.torque = torque;
     }
 
+    @Override
     public String getInfoCar() {
         String tmp = super.getInfoCar()+ ", Moment obrotny: "+ torque;
         return tmp;

@@ -10,6 +10,7 @@ public abstract class Motorcycle extends Vehicle {
         this.driveType = driveType;
     }
 
+    @Override
     public String getInfoCar() {
         String tmp= super.getInfoCar()+ ", Typ napędu: " + driveType;
         return tmp;

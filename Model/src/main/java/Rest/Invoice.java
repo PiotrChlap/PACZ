@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Invoice {
-    private int InvoiceId;
+    private final int InvoiceId;
     private LocalDate dateOfPayment;
     private LocalDate dateOfissue;
     private boolean paid;
@@ -64,7 +64,7 @@ public class Invoice {
         tmp.append("\n");
         tmp.append(order.getTotalCost());
         tmp.append("\n");
-        return tmp.toString()+order.getInfoOrder();
+        return tmp +order.getInfoOrder();
 
     }
 

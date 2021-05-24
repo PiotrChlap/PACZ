@@ -14,8 +14,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class DataBaseMenager {
-    private DAO dao;
-    private Connection conn;
+    private final DAO dao;
+    private final Connection conn;
 
     public DataBaseMenager() {
         dao=new DAO();
@@ -341,11 +341,7 @@ public class DataBaseMenager {
     public void addNewSpecial(List<String> arg){
         try {
             boolean tmp;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
+            tmp= arg.get(4).equals("Tak");
             String query = "INSERT INTO special values(?,?,?,?,?,?, ?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
@@ -367,11 +363,7 @@ public class DataBaseMenager {
     public void addNewChopper(List<String> arg){
         try {
             boolean tmp;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
+            tmp= arg.get(4).equals("Tak");
             String query = "INSERT INTO chopper values(?,?,?,?,?,?, ?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
@@ -393,11 +385,7 @@ public class DataBaseMenager {
     public void addNewTruck(List<String> arg){
         try {
             boolean tmp;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
+            tmp= arg.get(4).equals("Tak");
             String query = "INSERT INTO truck values(?,?,?,?,?,?, ?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
@@ -419,11 +407,7 @@ public class DataBaseMenager {
     public void addNewCross(List<String> arg){
         try {
             boolean tmp;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
+            tmp= arg.get(4).equals("Tak");
             String query = "INSERT INTO cross_M values(?,?,?,?,?,?, ?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
@@ -448,26 +432,10 @@ public class DataBaseMenager {
             boolean a;
             boolean d;
             boolean b;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
-            if(arg.get(9).equals("Tak")){
-                a=true;
-            } else {
-                a=false;
-            }
-            if(arg.get(10).equals("Tak")){
-                d=true;
-            } else {
-                d=false;
-            }
-            if(arg.get(11).equals("Tak")){
-                b=true;
-            } else {
-                b=false;
-            }
+            tmp= arg.get(4).equals("Tak");
+            a= arg.get(9).equals("Tak");
+            d= arg.get(10).equals("Tak");
+            b= arg.get(11).equals("Tak");
             String query = "INSERT INTO premiumPassCar values(?,?,?,?,?,?, ?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
@@ -492,11 +460,7 @@ public class DataBaseMenager {
     public void addNewTouristic(List<String> arg){
         try {
             boolean tmp;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
+            tmp= arg.get(4).equals("Tak");
             String query = "INSERT INTO touristMotorcycle values(?,?,?,?,?,?, ?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
@@ -519,16 +483,8 @@ public class DataBaseMenager {
         try {
             boolean tmp;
             boolean a;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
-            if(arg.get(11).equals("Tak")){
-                a=true;
-            } else {
-                a=false;
-            }
+            tmp= arg.get(4).equals("Tak");
+            a= arg.get(11).equals("Tak");
             String query = "INSERT INTO familyPassCar values(?,?,?,?,?,?, ?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
@@ -555,21 +511,9 @@ public class DataBaseMenager {
             boolean tmp;
             boolean a;
             boolean b;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
-            if(arg.get(9).equals("Tak")){
-                a=true;
-            } else {
-                a=false;
-            }
-            if(arg.get(10).equals("Tak")){
-                b=true;
-            } else {
-                b=false;
-            }
+            tmp= arg.get(4).equals("Tak");
+            a= arg.get(9).equals("Tak");
+            b= arg.get(10).equals("Tak");
             String query = "INSERT INTO sportPassCar values(?,?,?,?,?,?, ?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);
@@ -594,11 +538,7 @@ public class DataBaseMenager {
     public void addNewSportMotor(List<String> arg){
         try {
             boolean tmp;
-            if(arg.get(4).equals("Tak")){
-                tmp=true;
-            } else {
-                tmp=false;
-            }
+            tmp= arg.get(4).equals("Tak");
             String query = "INSERT INTO sportMotorcycle values(?,?,?,?,?,?, ?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, getHighestIDVehicle() + 1);

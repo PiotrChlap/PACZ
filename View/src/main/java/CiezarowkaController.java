@@ -23,10 +23,6 @@ public class CiezarowkaController {
     ObservableList<String> SkrzyniaBiegowLista = FXCollections
             .observableArrayList("Tak","Nie");
     private Place place;
-
-    public void setPlace(Place place) {
-        this.place = place;
-    }
     @FXML
     private TextField PoleID;
     @FXML
@@ -46,12 +42,13 @@ public class CiezarowkaController {
     @FXML
     private TextField LiczbaDrzwi;
     @FXML
-    private TextField LiczbaSiedzen;
-    @FXML
     private TextField MaksymalnaLadownosc;
     private Connection conn;
     private DataBaseMenager dataBaseMenager;
 
+    public void setPlace(Place place) {
+        this.place = place;
+    }
     public void setDataBaseMenager(DataBaseMenager dataBaseMenager) {
         this.dataBaseMenager = dataBaseMenager;
     }

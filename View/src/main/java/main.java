@@ -9,9 +9,7 @@ import javafx.stage.Stage;
 
 public class main extends Application{
 
-    public static void main(String args[]){
-//        DAO dao = new DAO();
-//        dao.connect();
+    public static void main(String[] args){
         launch(args);
     }
 

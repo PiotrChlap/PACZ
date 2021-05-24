@@ -8,6 +8,7 @@ public class TouristMotorcycle  extends Motorcycle{
         this.bootCapacity = bootCapacity;
     }
 
+    @Override
     public String getInfoCar() {
         String tmp = super.getInfoCar() + ", Rozmiar dodatkowych bagażników: " + bootCapacity;
         return tmp;

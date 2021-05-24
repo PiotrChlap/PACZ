@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class  Client {
-    private int id;
+    private final int id;
     private String address;
     private int loyaltyPoints=0;
-    private List<Order> listOfOrders=new ArrayList<>();
+    private final List<Order> listOfOrders=new ArrayList<>();
     private Controller controller;
-    private String password;
-    private String login;
+    private final String password;
+    private final String login;
 
     public Client(int id, String address, String password, String login) {
         this.id = id;
@@ -90,7 +90,7 @@ public abstract class  Client {
     public boolean closeOrder(int id) {
         Order order= findOrder(id);
         if(order.allRentsIsClosed()){
-            listOfOrders.remove(listOfOrders.indexOf(order));
+            listOfOrders.remove(order);
             return true;
         }
         return false;

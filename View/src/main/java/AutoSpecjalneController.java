@@ -24,8 +24,7 @@ public class AutoSpecjalneController {
     ObservableList<String> SkrzyniaBiegowLista = FXCollections
             .observableArrayList("Tak","Nie");
 
-    @FXML
-    private TextField PoleID;
+
     @FXML
     private TextField marka;
     @FXML
@@ -42,8 +41,6 @@ public class AutoSpecjalneController {
     private TextField RokProdukcji;
     @FXML
     private TextField LiczbaDrzwi;
-    @FXML
-    private TextField LiczbaSiedzen;
     @FXML
     private TextField Typ;
 

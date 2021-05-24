@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private int id;
-    private LocalDate submitDate;
-    private List<Rent> listOfRents = new ArrayList<>();
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddHHmmss");
-    private Client client;
+    private final int id;
+    private final LocalDate submitDate;
+    private final List<Rent> listOfRents = new ArrayList<>();
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMddHHmmss");
+    private final Client client;
 
     public Order(int id, LocalDate submitDate, Client client) {
         this.submitDate = submitDate;

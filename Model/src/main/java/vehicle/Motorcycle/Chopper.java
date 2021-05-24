@@ -8,6 +8,7 @@ public class Chopper extends Motorcycle{
         this.length = length;
     }
 
+    @Override
     public String getInfoCar() {
         String tmp = super.getInfoCar()+ ", Długość: "+ length;
         return tmp;

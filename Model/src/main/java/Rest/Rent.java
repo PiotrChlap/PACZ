@@ -7,10 +7,10 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class Rent {
-    private int rentId;
-    private LocalDate startDate;
+    private final int rentId;
+    private final LocalDate startDate;
     private LocalDate endDate;
-    private Vehicle rentedVehicle;
+    private final Vehicle rentedVehicle;
     private boolean closed=false;
 
     public Rent(int rentId, LocalDate startDate, LocalDate endDate, Vehicle rentedVehicle) {

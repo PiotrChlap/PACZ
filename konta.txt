@@ -1,2 +1,6 @@
+Po utworzeni dataBase zgodnie z plikiem README.txt
 Admin:
     password-> waznehaslo
+Klient:
+	login: jeden
+	haslo: jeden
